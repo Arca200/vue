@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app" style="display: flex;justify-content: center;align-items: center;width: 100vw;height: 100vh;"></div>
+<script type="module">
+  import { reactive } from '../src/reactive.js'
+  import { effect } from '../src/effect.js'
+
+  const app = document.getElementById('app')
+  ////////////////////////scheduler/////////////////
+  // const pet = reactive({
+  //   name: 'faff',
+  //   age: 1
+  // })
+  // let time
+  // const runner = effect(() => {
+  //     time = pet.age
+  //     app.innerText = time
+  //   }
+  //   , {
+  //     scheduler: () => {
+  //       console.log('this is scheduler')
+  //     }
+  //   }
+  // )
+  // setInterval(() => {
+  //   pet.age = 2
+  //   runner()
+  // }, 1000)
+
+  /////////////////////stop////////////////
+  // const pet = reactive({
+  //   name: 'faff',
+  //   age: 1,
+  // })
+  // let time
+  // let func = 0
+  // const runner = effect(() => {
+  //     time = pet.age
+  //     app.innerText = time
+  //   }
+  // )
+  // setInterval(() => {
+  //   pet.age++
+  //   // func++
+  //   // pet.age = func + 1
+  // }, 1000)
+  // setTimeout(() => {
+  //   stop(runner)
+  // }, 2000)
+
+  /////////////////////readonly////////////////
+  // const pet = readonly({
+  //   name: 'faff',
+  //   age: 1
+  // })
+  //
+  // app.innerText = pet.name
+  // pet.age++
+
+  /////////////////////深度响应式////////////////
+  const pet = reactive({
+    name: 'faff',
+    age: 1,
+    master: {
+      name: 'chen',
+      gender: 'female',
+      a: {
+        r: 1
+      }
+    }
+  })
+  let master
+  const runner = effect(() => {
+      master = pet.master
+      app.innerText = master.name
+    }
+  )
+  setInterval(() => {
+    pet.master = {
+      name: 'chen?'
+    }
+  }, 1000)
+
+  /////////////////////isReactive////////////////
+  // const pet = reactive({
+  //   name: 'faff',
+  //   age: 1,
+  // })
+  // const gf = readonly({
+  //   name: 'chen'
+  // })
+  // const gf2 = shallowReactive({
+  //   name: 'chen'
+  // })
+  // const gf3 = shallowReadonly({
+  //   name: 'chen'
+  // })
+  // console.log(isReactive(pet), isReadOnly(gf),
+  //   isReactive(gf), isReadOnly(pet),
+  //   isReactive(gf2), isReadOnly(gf2),
+  //   isReactive(gf3), isReadOnly(gf3))
+</script>
+</body>
+</html>

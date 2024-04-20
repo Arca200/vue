@@ -1,0 +1,12 @@
+{
+  "name": "@vue/shared",
+  "type": "module",
+  "main": "src/index.js",
+  "buildOptions": {
+    "name": "VueShared",
+    "formats": [
+      "esm-bundler",
+      "global"
+    ]
+  }
+}
